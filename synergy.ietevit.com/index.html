@@ -1,0 +1,473 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+	<br><br><br><br><br>
+		<title>Synergy'16</title>
+		<meta charset="utf-8" />
+		<link rel="shortcut icon" href="favicon.ico">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta property="og:title" content="Synergy'16" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="synergy.ietevit.com" />
+		<meta property="og:description"   content="“Unravelling The Future” - Creation of The Mind. Creation of a Better Future. 
+		22nd, 23rd, 24th Of January 2016" />
+		<meta property="og:image" content="http://ietevit.com/synergy/images/syn_fb.png" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		
+		<style>
+		.avatar {
+		        max-width: 50px;
+		        max-height: 50px;
+		        border-radius: 12px;
+		        vertical-align: 0px;
+   		 }
+   		 #holder
+		{
+		    display:table-cell;
+		    vertical-align:middle;
+		    text-align:center;
+		    height:300px;
+		    width:300px;
+		    border: 5px solid blue;
+		}
+		</style>
+
+		<style>
+		#slideshow { 
+		    margin: 50px auto; 
+		    position: relative; 
+		    height: 600px;
+		   
+		
+		}
+
+		#slideshow > div { 
+		    position: absolute; 
+		    top: 10px; 
+		    left: 10px; 
+		    right: 10px; 
+		    bottom: 10px; 
+		}
+
+		#slideshow > div > img { 
+		   box-shadow:0 -9px 15px -4px rgba(0,0,0,0.4), -12px 0 15px -4px rgba(0,0,0,0.4);
+		</style>
+
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+		<script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+ 		<link href="toastr.css" rel="stylesheet"/>
+		<script src="toastr.js"></script>
+
+		 
+
+
+ 		<script>
+ 		jQuery(document).ready(function(){
+
+
+      			function isValidEmailAddress(emailAddress) {
+			 	var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+				 return pattern.test(emailAddress);
+			};
+
+	 		var messagesRef = new Firebase('https://synergy16.firebaseio.com/messages');
+
+	 		var nameField = $('#name');
+	 		var emailField = $('#email');
+	 		var numberField = $('#number');
+	  		var messageField = $('#message');
+
+	  		var name = nameField.val();
+	  		var email = emailField.val();
+	  		var number = numberField.val();
+	      		var message = messageField.val();
+
+
+	      		$(function(){
+	      			$('#send').click(function() {
+	      			var name = nameField.val();
+	  			var email = emailField.val();
+	  			var number = numberField.val();
+	      			var message = messageField.val();
+
+	      			if (isValidEmailAddress(email) ){
+	      				messagesRef.push({name:name, email:email, number:number, text:message});
+		  		 	nameField.val("");
+		  		 	emailField.val("");
+		  		 	numberField.val("");
+		  		 	messageField.val("");
+		  		 	toastr.options = {
+						 
+						  "positionClass": "toast-bottom-left",
+						  "preventDuplicates": true,
+						}
+					toastr.success('Message sent successfully');
+	      			}
+	      			else {
+	      				toastr.options = {
+						  "positionClass": "toast-bottom-left",
+						  "preventDuplicates": true,
+						}
+						toastr.error('Invalid Email address');
+				}
+			    	});
+			}); 
+	  	});
+ 		</script>
+ 		
+	</head>
+	<body>
+		<script>
+			  window.fbAsyncInit = function() {
+			    FB.init({
+			      appId      : '1034448153264512',
+			      xfbml      : true,
+			      version    : 'v2.5'
+			    });
+			  };
+
+			  (function(d, s, id){
+			     var js, fjs = d.getElementsByTagName(s)[0];
+			     if (d.getElementById(id)) {return;}
+			     js = d.createElement(s); js.id = id;
+			     js.src = "//connect.facebook.net/en_US/sdk.js";
+			     fjs.parentNode.insertBefore(js, fjs);
+			   }(document, 'script', 'facebook-jssdk'));
+		</script>
+
+		<div id="fb-root"></div>
+		<script>
+			(function(d, s, id) {
+				  var js, fjs = d.getElementsByTagName(s)[0];
+				  if (d.getElementById(id)) return;
+				  js = d.createElement(s); js.id = id;
+				  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1034448153264512";
+				  fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
+		</script>
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+					
+						<h1><a href="https://www.facebook.com/vitiete/" ><img style="width: 6.3% !important; height: 73% !important; padding: 0.5em 0em 1em 0em ;" src="images/iete_small.png"/></a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="#workshops">Events</a></li>
+								<li><a href="#gs">Guest Lectures</a></li>
+								<li><a href="#gallery">Gallery</a></li>
+								<li><a href="external.html">External</a></li>
+								<li><a href="#git">Get In Touch</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Banner -->
+					<section id="banner">
+						<div class="inner">
+
+							<div class="logo" align="center">
+								<span style="display: inline-block; margin: 5px; "  class="icon"><img  style="width: 150px !important; height: 150px !important;" class="avatar" src="images/syn.png"></span>
+								<span style="display: inline-block;"><h2 >ynergy</h2></span>
+								
+								<hr class="ban" >
+
+								<p align="center"> <i><b>“Unravelling the future” </b></i></p>
+								<p align="center">-Creation of the mind. Creation of a better future. <br> 22ND, 23RD, 24TH OF JANUARY 2016</p>
+								<p  id="ppp" ><b>69 days to go</b></p></div>
+							</div>
+
+						<!-- <br><br><br> --><!-- <br><br><br> -->
+					</section>
+
+				<!-- Wrapper -->
+				<a name="workshops"></a>
+					<section id="wrapper">
+					
+						<!-- One -->
+							<section id="one" class="wrapper spotlight style1">
+								<div class="inner">
+									<a style="width: 150px !important; height: 150px !important;" class="image"><img src="images/bigdata.png" alt=""  /></a>
+									
+									<div class="content">
+										<h2 class="major">Big Data and Hadoop Workshop</h2>
+										<p>This three days workshop focuses on giving deep and inside knowledge about Big Data using Hadoop which is a purely industrial application with glimpse of Big Data applications.</p>
+
+										<a href="bigdata.html" target="_blank" class="special">Learn more</a>
+									</div>
+								</div>
+
+							</section>
+							
+						<!-- Two -->
+							<section id="two" class="wrapper alt spotlight style2">
+								<div class="inner">
+									<a style="width: 150px !important; height: 150px !important;" class="image"><img src="images/xbee.png" alt="" /></a>
+									<div class="content">
+										<h2 class="major">Xbee Communication Workshop</h2>
+										<p>Xbee Communication workshop , conducted by TechnoXian mainly focuses on the students who are enthusiastic  to learn Wireless Communication using Xbee Protocol and AVR microcontroller. Xbee transceiver module is easy to integrate and provide reliable wireless communication up to 100 meters. Xbee supports point to point and multi point networks.</p>
+										<a href="xbee.html" target="_blank" class="special">Learn more</a>
+									</div>
+								</div>
+							</section>
+
+						<!-- Three -->
+							<section id="three" class="wrapper spotlight style3">
+								<div class="inner">
+									<a style="width: 150px !important; height: 150px !important;" class="image"><img src="images/paper.png" alt="" /></a>
+									<div class="content">
+										<h2 class="major">Paper Presentation Competition</h2>
+										<p>IETE brings to you the opportunity to show to the world that you have it in you to do the best academic research work in your respective fields.
+										We bring forward a stage for all those who wish to gain recognition of their work at an international level. Students are welcome to participate and showcase their research papers and get a chance to get their papers published by The International Journal for Research in Engineering and Technology (IJRET).</p>
+										<a href="paper.html" target="_blank" class="special">Learn more</a>
+									</div>
+								</div>
+							</section>
+
+						<!-- ThreeA -->
+							<section id="four" class="wrapper alt spotlight style4">
+								<div class="inner">
+									<a style="width: 150px !important; height: 150px !important;" class="image"><img src="images/codeathon.png" alt="" /></a>
+									<div class="content">
+										<h2 class="major">CodeOlympia</h2>
+										<p>A 12 hour code-a-thon starting 8a.m. will take place. The competiton is being organized in collaboration with HackerRank.</p>
+										<a href="https://www.hackerrank.com/codeolympia16" target="_blank" class="special">Learn more</a>
+								</div>
+							</section>
+
+						
+							<a name="gs"></a>
+						<!-- Four -->
+							<section id="four" class="wrapper alt style1">
+								<div class="inner">
+									<h2 class="major">GUEST LECTURES</h2>
+									<p></p>
+									<section class="features">
+										<article>
+											<a href="https://www.linkedin.com/in/lohit" class="image"><img src="images/Lohit1.jpg" alt=""  /></a>
+											<h3 class="major" >Mr. Lohit Sahu</h3>
+											<p id="long">He is the Founder and Director at Phyzok Learning Solutions LLP, a firm that creates solutions to enhance education delivery systems in schools. Over the past three years, Phyzok has touched more than 1.5 lakh students to understand how the education delivery system can be made lean and multiple times effective. At the end of 2012, Phyzok launched their flagship product "Phyzok Flipped" that promises to revolutionise the current education system. Its launch has attracted attention of big names in education sector – CBSE has started promoting Flipped Learning, BBC covered Phyzok Flipped in their issue, and Pearson's published a case study on Phyzok in their book on entrepreneurship alongside Google and RedBus because of their seamless Bootstrapping business model. He graduated from BITS Pilani with a Bachelor’s degree in Mechanical Engineering. He is also the recipient of BITSAA Global 30 under 30 award, "Star Entrepreneur Award" at the 5th Indira International Innovation Summit, “Hottest Young Entrepreneurs" for the year 2011.He is also a mentor at BITS Pilani's global course on New Venture Creation.He has been invited as a judge/speaker at the "Young India Fellowship", IIMs, national business plan competitions, etc. </p>
+											
+										</article>
+										<article>
+											<a href="https://www.linkedin.com/pub/akshay-goel/23/508/733" class="image"><img src="images/Akshayl1.jpg" alt="" /></a>
+											<h3 class="major">Mr. Akshay Goel</h3>
+											<p>Dr Akshay Goel is the Senior Vice President ,R&D at Biological E, Hyderabad, with an experience of over 20 years in the vaccine industry. He is responsible for external technology evaluation technology transfer, process development, early clinical manufacturing, process validation and process transfer to consumer manufacturing. </p>
+											
+										</article>
+										<article>
+											
+											<h3 class="major">Mr. Sijomon</h3>
+											<p>Mr Sijomon is an engineer from DRDO with an experience of over 10 years.He will be the speaker for the inauguration ceremony along with Mr. K.S Chakravarthy,Chairman IETE, Chennai Centre.</p>
+											
+										</article>
+
+										
+										
+									</section>
+								</div>
+
+								<!-- ThreeB -->
+							<section id="five" class="wrapper spotlight style5">
+								<div class="inner">
+									<a style="width: 150px !important; height: 150px !important;" class="image"><img src="images/cultural.png" alt="" /></a>
+									<div class="content">
+										<h2 class="major">Cultural Night</h2>
+										<p>All participants and non participants are invited to attend the cultural evening and enjoy the music, dance and food. Limited passes will be provided and the registration are on first come first serve basis.</p>
+										<!-- <a href="#" class="special">Learn more</a> -->
+									</div>
+								</div>
+							</section>
+
+							<!-- ThreeC -->
+							<section id="six" class="wrapper alt spotlight style6">
+								<div class="inner">
+									<a style="width: 150px !important; height: 150px !important;" class="image"><img src="images/social.png" alt="" /></a>
+									<div class="content">
+										<h2 class="major">Social Initiative</h2>
+										<p>IETE has undertaken a social initiative to raise funds for the Universal Higher Education Trust (UHET) through Synergy’16. UHET is a trust which provides a platform for the students, whose family income is not enough for the completion of their education, to complete their school education and college education. It would be a privilege for IETE to contribute for such a noble cause. </p>
+										<!-- <a href="#" class="special">Learn more</a> -->
+									</div>
+								</div>
+							</section>
+							
+							
+
+								<a name="gallery"></a>
+
+								<div class="wrapper">
+								<div class="inner">
+									
+
+									<section>
+										
+										
+										<div class="box alt">
+											<div class="row uniform" align="center" id="slideshow">
+											<br><br>
+												<div style="padding: 0 0 0 0 !important;" class="image fit"><img  src="images/ps_main.jpg" alt="" /></div>
+												<div style="padding: 0 0 0 0 !important;" class="image fit"><img  src="images/ps_1.jpg" alt="" /></div>
+												<div style="padding: 0 0 0 0 !important;" class="image fit"><img  src="images/ps_2.jpg" alt="" /></div>
+												<div style="padding: 0 0 0 0 !important;" class="image fit"><img  src="images/ps_3.jpg" alt="" /></div>
+												<div style="padding: 0 0 0 0 !important;" class="image fit"><img  src="images/ps_4.jpg" alt="" /></div>
+												<div style="padding: 0 0 0 0 !important;" class="image fit"><img  src="images/ps_5.jpg" alt="" /></div>
+												<div style="padding: 0 0 0 0 !important;" class="image fit"><img  src="images/ps_6.jpg" alt="" /></div>
+												<div style="padding: 0 0 0 0 !important;" class="image fit"><img  src="images/ps_7.jpg" alt="" /></div>
+												<div style="padding: 0 0 0 0 !important;" class="image fit"><img  src="images/ps_8.jpg" alt="" /></div>
+												<div style="padding: 0 0 0 0 !important;" class="image fit"><img  src="images/ps_9.jpg" alt="" /></div>
+
+												<!-- <div class="4u"><span class="image fit"><img id="demo1" src="images/ps_1.jpg" href="images/ps_1.jpg" alt="" /></span></div>
+												<div class="4u"><span class="image fit"><img src="images/ps_2.jpg" alt="" /></span></div>
+												<div class="4u$"><span class="image fit"><img src="images/ps_3.jpg" class = "image-link" alt="" /></span></div>
+												<div class="4u"><span class="image fit"><img src="images/ps_4.jpg" alt="" /></span></div>
+												<div class="4u"><span class="image fit"><img src="images/ps_5.jpg" alt="" /></span></div>
+												<div class="4u$"><span class="image fit"><img src="images/ps_6.jpg" alt="" /></span></div>
+												<div class="4u"><span class="image fit"><img src="images/ps_7.jpg" alt="" /></span></div>
+												<div class="4u"><span class="image fit"><img src="images/ps_8.jpg" alt="" /></span></div>
+												<div class="4u$"><span class="image fit"><img src="images/ps_9.jpg" alt="" /></span></div> -->
+
+												</style>
+											</div>
+										</div>
+
+										<!-- <br><br><br>
+										<div style="style="float: right; margin: 10px;" class="fb-page" data-href="https://www.facebook.com/vitiete" data-width="500" data-height="700" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/vitiete"><a href="https://www.facebook.com/vitiete">IETE VIT</a></blockquote></div></div>
+									</section> -->
+
+									
+
+									<!-- <section>
+										<h3 class="major">Our Sponsors</h3>
+
+
+										
+										<div class="box alt">
+											<div class="row uniform">
+												<br>
+												<br>
+												<div class="4u"><span class="image fit"><img src="images/pic05.jpg" alt="" /></span></div>
+												<div class="4u"><span class="image fit"><img src="images/pic06.jpg" alt="" /></span></div>
+												<div class="4u$"><span class="image fit"><img src="images/pic07.jpg" alt="" /></span></div>
+												
+										</div>
+									</section> -->
+
+
+
+									</div>
+									</div>
+
+
+
+
+							</section>
+
+					</section>
+					<a name="git"></a>
+				<!-- Footer -->
+					<section id="footer">
+						<div class="inner">
+							<h2 class="major">Get in touch</h2>
+							<p></p>
+							<form>
+								<div class="field">
+									<label for="name">Name</label>
+									<input type="text" name="name" id="name" />
+								</div>
+								<div class="field">
+									<label for="email">Email</label>
+									<input type="email" name="email" id="email" />
+								</div>
+								<div class="field">
+									<label for="Number">Phone Number</label>
+									<input type="tel" name="number" id="number" />
+								</div>
+								<div class="field">
+									<label for="message">Message</label>
+									<textarea name="message" id="message" rows="4"></textarea>
+								</div>
+								<ul class="actions">
+									<li><input type="button" value="Send Message" id="send" /></li>
+								</ul>
+							</form>
+							<ul class="contact">
+								<li class="fa-home">
+									VIT University<br />
+									Near Katpadi Rd, Vellore,<br />
+									Tamil Nadu 632014
+								</li>
+								<li class="fa-phone">+91-8940-502-402</li>
+								<li class="fa-phone">+91-9597-468-410</li>
+								<li class="fa-envelope"><a href="mailto:synergy#ietevit.com">synergy@ietevit.com</a></li>
+								<li class="fa-twitter"><a href="https://twitter.com/iete_vit">twitter.com/iete_vit</a></li>
+								<li class="fa-facebook"><a href="https://www.facebook.com/vitiete/">facebook.com/vitiete</a></li>
+							</ul>
+							<ul class="copyright">
+								<li>&copy; IETE ISF All rights reserved.</li><li>Design: <a href="http://namitjuneja.com">Namit Juneja</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+			<script src="rm.js"></script>
+			 <script>
+   				 $('#long').readmore({speed: 200, moreLink: '<a href="#" class="special">Learn more</a>'});
+   			</script>
+
+   			<script>
+   				$("#slideshow > div:gt(0)").hide();
+
+				setInterval(function() 
+				{ 
+				  $('#slideshow > div:first')
+				    .fadeOut(700)
+				    .next()
+				    .fadeIn(700)
+				    .end()
+				    .appendTo('#slideshow');
+				},  3000);
+   			</script>
+			
+			 </script>
+
+
+   			<script>
+	 		var checkindatestr = "22-01-2016";
+			var dateParts = checkindatestr.split("-");
+
+			var checkindate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+			var now = new Date();
+			var difference = checkindate - now;
+			var days = difference / (1000*60*60*24);
+
+			document.getElementById("ppp").innerHTML = String( Math.round(days)) + " days to go";
+	 		</script>
+   			  
+
+
+	</body>
+</html>
